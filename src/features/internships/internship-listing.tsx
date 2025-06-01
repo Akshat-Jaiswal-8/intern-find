@@ -1,15 +1,15 @@
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { useErrorHandler } from '@/lib/error-utils.ts';
 import { useInternships } from '@/services/internships/useInternships.ts';
 import type { Internship } from '@/types/internship.ts';
+import React, { useEffect, useMemo, useState } from 'react';
 
-import Stats from '@/features/internships/stats.tsx';
 import { InternshipCard } from '@/features/internships/internship-card.tsx';
 import { InternshipFilters } from '@/features/internships/internship-filters.tsx';
 import { InternshipListingLoadingSkeleton } from '@/features/internships/internship-listing-loading-skeleton.tsx';
+import Stats from '@/features/internships/stats.tsx';
 
-import { Card } from '@/components/ui/card.tsx';
 import { Error } from '@/components/error';
+import { Card } from '@/components/ui/card.tsx';
 import { AlertCircle } from 'lucide-react';
 
 export const InternshipListing = React.memo(() => {
@@ -27,17 +27,6 @@ export const InternshipListing = React.memo(() => {
   const [filteredInternships, setFilteredInternships] = useState<Internship[]>(
     [],
   );
-
-  if (isLoading || isRefetching) {
-    <InternshipListingLoadingSkeleton />;
-  }
-
-  const handleRefresh = () => refetch();
-
-  if (error) {
-    handleError(error, refetch);
-    return <Error handleRefresh={handleRefresh} />;
-  }
 
   const processedInternships = useMemo(() => {
     if (!apiInternships?.internships_meta || !apiInternships?.internship_ids) {
@@ -77,6 +66,17 @@ export const InternshipListing = React.memo(() => {
     };
   }, [internships]);
 
+  if (isLoading || isRefetching) {
+    return <InternshipListingLoadingSkeleton />;
+  }
+
+  const handleRefresh = () => refetch();
+
+  if (error) {
+    handleError(error, refetch);
+    return <Error handleRefresh={handleRefresh} />;
+  }
+
   if (
     !apiInternships ||
     !apiInternships.internships_meta ||
@@ -104,14 +104,14 @@ export const InternshipListing = React.memo(() => {
           </p>
         </div>
         {stats && <Stats stats={stats} />}
-        <div className='flex flex-col gap-8 md:flex-row'>
-          <div className='top-24 h-fit w-full md:sticky md:w-1/3 lg:w-1/4'>
+        <div className='mt-20 grid grid-cols-1 gap-10 lg:grid-cols-3'>
+          <div className='top-20 h-fit w-full md:sticky'>
             <InternshipFilters
               internships={internships}
               onFilteredChange={setFilteredInternships}
             />
           </div>
-          <div className='w-full md:w-2/3 lg:w-3/4'>
+          <div className='w-full lg:col-span-2'>
             {filteredInternships.length === 0 ? (
               <Card className='p-12 text-center'>
                 <div className='space-y-4'>

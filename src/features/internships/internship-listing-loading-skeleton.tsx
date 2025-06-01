@@ -10,7 +10,7 @@ export const InternshipListingLoadingSkeleton = React.memo(() => {
       <div className='container mx-auto space-y-8 px-4 py-8'>
         <div className='space-y-4 text-center'>
           <Skeleton className='mx-auto h-14 w-96 rounded-xl' />
-          <Skeleton className='mx-auto h-6 w-[600px] rounded-lg' />
+          <Skeleton className='mx-auto h-6 w-80 rounded-lg' />
         </div>
 
         <div className='grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6'>
@@ -19,31 +19,12 @@ export const InternshipListingLoadingSkeleton = React.memo(() => {
           ))}
         </div>
 
-        <div className='space-y-4'>
-          <Skeleton className='h-12 w-full rounded-lg' />
-          <div className='flex flex-wrap gap-4'>
-            {Array.from({ length: 5 }).map((_, i) => (
-              <Skeleton key={i} className='h-10 w-32 rounded-md' />
+        <div className='grid w-full grid-cols-1 gap-10 lg:grid-cols-3'>
+          <Skeleton className='h-fit w-full lg:h-80' />
+          <div className='col-span-2 grid grid-cols-1 gap-6 md:grid-cols-2'>
+            {Array.from({ length: 4 }).map((_, i) => (
+              <SkeletonCard key={i} />
             ))}
-          </div>
-        </div>
-
-        <div className='grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3'>
-          {Array.from({ length: 12 }).map((_, i) => (
-            <SkeletonCard key={i} />
-          ))}
-        </div>
-
-        <div className='mt-8 flex flex-col items-center justify-between gap-4 sm:flex-row'>
-          <Skeleton className='h-6 w-48 rounded-md' />
-          <div className='flex items-center gap-2'>
-            <Skeleton className='h-9 w-20 rounded-md' />
-            <div className='flex items-center gap-1'>
-              {Array.from({ length: 5 }).map((_, i) => (
-                <Skeleton key={i} className='h-8 w-8 rounded-md' />
-              ))}
-            </div>
-            <Skeleton className='h-9 w-16 rounded-md' />
           </div>
         </div>
       </div>
