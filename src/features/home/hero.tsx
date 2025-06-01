@@ -100,7 +100,7 @@ export const Hero = React.memo(() => {
               <h1 className='font-poppins bg-gradient-to-r from-blue-500 to-blue-800 bg-clip-text text-3xl font-bold text-transparent sm:text-4xl md:text-5xl lg:text-7xl'>
                 Find Your Perfect Internship
               </h1>
-              <p className='mx-auto max-w-3xl text-gray-600 md:text-xl'>
+              <p className='mx-auto max-w-3xl text-slate-600 md:text-xl dark:text-slate-300'>
                 Discover thousands of internship opportunities from top
                 companies. Powered by Internshala's comprehensive database to
                 kickstart your career.
