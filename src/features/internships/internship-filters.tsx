@@ -107,18 +107,18 @@ export const InternshipFilters: React.FC<InternshipFiltersProps> = React.memo(
 
     return (
       <div className='bg-card border-border space-y-4 rounded-lg border p-4 shadow-sm'>
-        <div className='grid grid-cols-1 gap-4 md:grid-cols-2'>
+        <div className='space-y-2'>
           <div className='relative'>
-            <Search className='text-muted-foreground absolute top-3 left-3 h-4 w-4' />
+            <Search className='text-muted-foreground absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2' />
             <Input
-              placeholder='Search internships, companies, roles...'
+              placeholder='Internships, companies...'
               value={searchTerm}
               onChange={handleSearchChange}
               className='pl-10'
             />
           </div>
           <div className='relative'>
-            <MapPin className='text-muted-foreground absolute top-3 left-3 h-4 w-4' />
+            <MapPin className='text-muted-foreground absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2' />
             <Input
               placeholder='Filter by location...'
               value={locationFilter}

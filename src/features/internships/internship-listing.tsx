@@ -28,6 +28,17 @@ export const InternshipListing = React.memo(() => {
     [],
   );
 
+  if (isLoading || isRefetching) {
+    <InternshipListingLoadingSkeleton />;
+  }
+
+  const handleRefresh = () => refetch();
+
+  if (error) {
+    handleError(error, refetch);
+    return <Error handleRefresh={handleRefresh} />;
+  }
+
   const processedInternships = useMemo(() => {
     if (!apiInternships?.internships_meta || !apiInternships?.internship_ids) {
       return [];
@@ -66,17 +77,6 @@ export const InternshipListing = React.memo(() => {
     };
   }, [internships]);
 
-  const handleRefresh = () => refetch();
-
-  if (isLoading || isRefetching) {
-    <InternshipListingLoadingSkeleton />;
-  }
-
-  if (error) {
-    handleError(error, refetch);
-    return <Error handleRefresh={handleRefresh} />;
-  }
-
   if (
     !apiInternships ||
     !apiInternships.internships_meta ||
@@ -104,28 +104,36 @@ export const InternshipListing = React.memo(() => {
           </p>
         </div>
         {stats && <Stats stats={stats} />}
-        <InternshipFilters
-          internships={internships}
-          onFilteredChange={setFilteredInternships}
-        />
-        {filteredInternships.length === 0 ? (
-          <Card className='p-12 text-center'>
-            <div className='space-y-4'>
-              <AlertCircle className='text-muted-foreground mx-auto h-16 w-16' />
-              <h3 className='text-xl font-semibold'>No internships found</h3>
-              <p className='text-muted-foreground'>
-                Try adjusting your search criteria or filters to find more
-                opportunities.
-              </p>
-            </div>
-          </Card>
-        ) : (
-          <div className='grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3'>
-            {filteredInternships.map((internship) => (
-              <InternshipCard key={internship.id} internship={internship} />
-            ))}
+        <div className='flex flex-col gap-8 md:flex-row'>
+          <div className='top-24 h-fit w-full md:sticky md:w-1/3 lg:w-1/4'>
+            <InternshipFilters
+              internships={internships}
+              onFilteredChange={setFilteredInternships}
+            />
           </div>
-        )}
+          <div className='w-full md:w-2/3 lg:w-3/4'>
+            {filteredInternships.length === 0 ? (
+              <Card className='p-12 text-center'>
+                <div className='space-y-4'>
+                  <AlertCircle className='text-muted-foreground mx-auto h-16 w-16' />
+                  <h3 className='text-xl font-semibold'>
+                    No internships found
+                  </h3>
+                  <p className='text-muted-foreground'>
+                    Try adjusting your search criteria or filters to find more
+                    opportunities.
+                  </p>
+                </div>
+              </Card>
+            ) : (
+              <div className='grid grid-cols-1 gap-6 md:grid-cols-2'>
+                {filteredInternships.map((internship) => (
+                  <InternshipCard key={internship.id} internship={internship} />
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
       </div>
     </div>
   );
