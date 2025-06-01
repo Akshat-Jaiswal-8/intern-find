@@ -1,11 +1,37 @@
-import {Button} from "@/components/ui/button.tsx";
+import { BrowserRouter } from 'react-router';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import { AnimatedRoutes } from './components/animated-routes';
+import { ThemeProvider } from './components/theme-provider';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { Toaster } from './components/ui/sonner';
+import React, { useMemo } from 'react';
 
-function App() {
-    return (
-        <div className="flex flex-col items-center justify-center min-h-svh">
-            <Button>Click me</Button>
-        </div>
-    )
-}
+const App = React.memo(() => {
+  const queryClient = useMemo(
+    () =>
+      new QueryClient({
+        defaultOptions: {
+          queries: {
+            staleTime: 60 * 1000,
+          },
+        },
+      }),
+    [],
+  );
 
-export default App
+  return (
+    <QueryClientProvider client={queryClient}>
+      <ReactQueryDevtools initialIsOpen={false} />
+      <ThemeProvider defaultTheme='dark' storageKey='vite-ui-theme'>
+        <BrowserRouter>
+          <AnimatedRoutes />
+        </BrowserRouter>
+        <Toaster richColors position='top-right' closeButton />
+      </ThemeProvider>
+    </QueryClientProvider>
+  );
+});
+
+App.displayName = 'App';
+
+export default App;

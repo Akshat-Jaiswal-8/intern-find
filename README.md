@@ -1,54 +1,84 @@
-# React + TypeScript + Vite
+# Intern Find
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project is a web application built for an assignment, focusing on finding
+internships. It utilizes a modern tech stack including React, TypeScript, and
+Vite.
 
-Currently, two official plugins are available:
+## Tech Stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Frontend:** React, TypeScript, Vite
+- **Styling:** Tailwind CSS, Shadcn/UI
+- **Routing:** React Router
+- **State Management:** Tanstack Query
+- **Linting:** ESLint
+- **Package Manager:** Bun
 
-## Expanding the ESLint configuration
+## Getting Started
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### Prerequisites
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+Make sure you have the following installed on your system:
+
+- [Node.js](https://nodejs.org/) (v18 or higher recommended)
+- [Bun](https://bun.sh/) (optional, but recommended for faster performance)
+
+### Installation
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/Akshat-Jaiswal-8/intern-find
+   ```
+2. Navigate to the project directory:
+   ```bash
+   cd intern-find
+   ```
+3. Install dependencies:
+   ```bash
+   bun install
+   ```
+
+### Running the Project
+
+To start the development server, run:
+
+```bash
+bun run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Open [http://localhost:5173](http://localhost:5173) (or the port shown in your
+terminal) in your browser to view the application.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## Available Scripts
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+In the project directory, you can run the following scripts:
+
+- `bun run dev`: Runs the app in development mode.
+- `bun run build`: Builds the app for production.
+- `bun run lint`: Lints the codebase using ESLint.
+- `bun run preview`: Serves the production build locally for preview.
+
+## Folder Structure
+
+```
+intern-find/
+├── public/                  # Static assets
+├── src/
+│   ├── components/          # Reusable UI components
+│   │   ├── ui/              # Shadcn/UI components
+│   ├── features/            # Feature-specific modules (e.g., internships, home)
+│   ├── lib/                 # Utility functions and API helpers
+│   ├── pages/               # Page-level components
+│   ├── services/            # API service integrations
+│   ├── types/               # TypeScript type definitions
+│   ├── App.tsx              # Main application component
+│   ├── index.css            # Global styles
+│   ├── main.tsx             # Entry point of the application
+│   └── vite-env.d.ts        # Vite environment type definitions
+├── eslint.config.js         # ESLint configuration
+├── index.html               # Main HTML file
+├── package.json             # Project metadata and dependencies
+├── tsconfig.json            # TypeScript configuration
+├── tsconfig.node.json       # TypeScript configuration for Node.js
+├── vite.config.ts           # Vite configuration
+└── README.md                # This file
 ```
